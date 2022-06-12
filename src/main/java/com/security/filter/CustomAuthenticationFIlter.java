@@ -40,7 +40,7 @@ public class CustomAuthenticationFIlter extends UsernamePasswordAuthenticationFi
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		log.info("Username is {}.", username);
-		log.info("Password is hidden.");
+		log.info("Password is hidden. {}", password);
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
 				password);
 		return authenticationManager.authenticate(authenticationToken);
@@ -53,13 +53,13 @@ public class CustomAuthenticationFIlter extends UsernamePasswordAuthenticationFi
 		Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
 		String access_token = JWT.create()
 				.withSubject(user.getUsername())
-				.withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+				.withExpiresAt(new Date(System.currentTimeMillis() + 10000 * 60 * 1000))
 				.withIssuer(request.getRequestURI().toString())
 				.withClaim("role", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 				.sign(algorithm);
 		String refresh_token = JWT.create()
 				.withSubject(user.getUsername())
-				.withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
+				.withExpiresAt(new Date(System.currentTimeMillis() + 300 * 60 * 1000))
 				.withIssuer(request.getRequestURI().toString())
 				.sign(algorithm);
 		

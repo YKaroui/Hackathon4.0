@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import com.service.implementations.ForgetPasswordService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
+@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("/forgetPassword")
 @FieldDefaults(level = AccessLevel.PRIVATE)

@@ -1,10 +1,8 @@
 package com.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -48,9 +46,7 @@ public class Product implements Serializable {
 	@Column(name = "NAME", nullable = false)
 	@NotBlank(message = "Name required")
 	String name;
-	@ElementCollection
-	@JsonIgnore
-	List<String> images;
+	String image;
 	@Column(name = "DESCRIPTION", columnDefinition = "Text", nullable = false)
 	@NotBlank(message = "Description required")
 	String description;

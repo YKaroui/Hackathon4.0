@@ -59,6 +59,9 @@ public class Event implements Serializable {
 	float objective;
 	@Column(name = "ACHIEVED", nullable = false)
 	float achieved = 0;
+	@Column(name = "DESCRIPTION", columnDefinition = "Text", nullable = false)
+	@NotBlank(message = "Description required")
+	String description;
 	String image;
 	@ManyToOne()
 	@JsonIgnore

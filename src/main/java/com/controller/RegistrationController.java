@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import com.service.implementations.RegistrationService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 
+@CrossOrigin("http://localhost:4200/")
 @RestController
 @RequestMapping("/registration")
 @FieldDefaults(level = AccessLevel.PRIVATE)
