@@ -40,18 +40,19 @@ public class EventService implements IEventService{
 		log.info("hatina l user");
 		Set<Product> products = event.getProducts();
 		Set<Product> newList = new HashSet<Product>();
-		event.setProducts(newList);
+		//event.setProducts(newList);
 		log.info("hatina l list product fergha");
 
 		for (Product i : products) {
 			Product productExist = productRepository.findByName(i.getName());
 			if (productExist != null) {
-				event.getProducts().add(productExist);
+				newList.add(productExist);
 			} else {
 				Product prod = productRepository.save(i);
-				event.getProducts().add(prod);
+				newList.add(prod);
 			}
 		}
+		event.setProducts(newList);
 		return eventRepository.save(event);
 	}
 
