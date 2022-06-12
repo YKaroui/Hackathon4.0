@@ -2,6 +2,7 @@ package com.service.implementations;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -10,13 +11,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.entity.User;
 import com.repository.UserRepository;
 import com.service.interfaces.IUserService;
-import com.utils.EmailService;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -27,12 +26,6 @@ import lombok.experimental.FieldDefaults;
 public class UserService implements IUserService, UserDetailsService{
 	@Autowired
 	UserRepository userRepository;
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
-	@Autowired
-	ConfirmationTokenService confirmationTokenService;
-	@Autowired
-	EmailService emailService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -41,5 +34,10 @@ public class UserService implements IUserService, UserDetailsService{
 		authorities.add(new SimpleGrantedAuthority(user.getRole().getAuthority()));
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
 				authorities);
+	}
+
+	@Override
+	public List<User> retrieveAll() {
+		return (List<User>) userRepository.findAll();
 	}
 }

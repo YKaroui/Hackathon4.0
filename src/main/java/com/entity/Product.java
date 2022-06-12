@@ -3,13 +3,11 @@ package com.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -67,7 +65,8 @@ public class Product implements Serializable {
 	@Column(name = "PRICE", nullable = false)
 	@NotNull(message = "Price required")
 	float price;
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToOne()
+	@JsonIgnore
 	User user;
 	
 

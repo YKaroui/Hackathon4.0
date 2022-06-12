@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +17,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -48,11 +48,9 @@ public class Event implements Serializable {
 	@NotBlank(message = "Title required")
 	String title;
 	@Column(name = "START_DATE", nullable = false)
-	@NotBlank(message = "Start date required")
 	@Temporal(TemporalType.DATE)
 	Date startDate;
 	@Column(name = "END_DATE", nullable = false)
-	@NotBlank(message = "End date required")
 	@Temporal(TemporalType.DATE)
 	Date endDate;
 	@Column(name = "OBJECTIVE", nullable = false)
@@ -60,9 +58,12 @@ public class Event implements Serializable {
 	float objective;
 	@Column(name = "ACHIEVED", nullable = false)
 	float achieved = 0;
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	String image;
+	@ManyToOne()
+	@JsonIgnore
 	User user;
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@OneToMany()
+	//@JsonIgnore
 	Set<Product> products;
 
 }

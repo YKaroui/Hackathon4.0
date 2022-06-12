@@ -31,23 +31,22 @@ public class ForgetPasswordController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} 
+		}
 	}
 
 	@GetMapping("/reset_password")
 	public ResponseEntity<String> showResetPasswordForm(@Param(value = "token") String token) {
 		String msg;
 		User user = forgetPasswordService.retrieveByResetPasswordToken(token);
-		if (user == null){
+		if (user == null) {
 			msg = "invalid Token";
 			return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
-		}
-		else{
+		} else {
 			msg = "interface change your password";
 			return new ResponseEntity<>(msg, HttpStatus.OK);
 		}
 	}
-	
+
 	@PutMapping("/updatePassword")
 	public ResponseEntity<String> updatePassword(@RequestBody User user) {
 		String msg = forgetPasswordService.updatePassword(user, user.getPassword());

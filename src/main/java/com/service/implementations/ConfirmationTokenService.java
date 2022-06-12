@@ -19,9 +19,7 @@ import lombok.experimental.FieldDefaults;
 public class ConfirmationTokenService implements IConfirmationTokenService {
 	@Autowired
 	ConfirmationTokenRepository confirmationTokenRepository;
-	
-	
-	
+
 	@Override
 	public ConfirmationToken add(ConfirmationToken confirmationToken) {
 		return confirmationTokenRepository.save(confirmationToken);
@@ -36,14 +34,11 @@ public class ConfirmationTokenService implements IConfirmationTokenService {
 	public Optional<ConfirmationToken> getByToken(String token) {
 		return confirmationTokenRepository.findByToken(token);
 	}
-	
 
 	@Override
-	public void deleteToken(User user){
+	public void deleteToken(User user) {
 		ConfirmationToken ct = confirmationTokenRepository.findByUser(user);
 		confirmationTokenRepository.delete(ct);
 	}
-
-	
 
 }

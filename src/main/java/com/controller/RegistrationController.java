@@ -33,7 +33,7 @@ public class RegistrationController {
 		else
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@PostMapping("/admin")
 	public ResponseEntity<User> addAdmin(@Valid @RequestBody User user) {
 		User userSaved = registrationService.registerAdmin(user);
